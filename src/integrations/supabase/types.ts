@@ -14,13 +14,142 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      clientes: {
+        Row: {
+          criado_em: string | null
+          criado_por: string | null
+          email: string | null
+          endereco: string | null
+          id: string
+          nome: string
+          observacoes: string | null
+          telefone: string | null
+        }
+        Insert: {
+          criado_em?: string | null
+          criado_por?: string | null
+          email?: string | null
+          endereco?: string | null
+          id?: string
+          nome: string
+          observacoes?: string | null
+          telefone?: string | null
+        }
+        Update: {
+          criado_em?: string | null
+          criado_por?: string | null
+          email?: string | null
+          endereco?: string | null
+          id?: string
+          nome?: string
+          observacoes?: string | null
+          telefone?: string | null
+        }
+        Relationships: []
+      }
+      gastos: {
+        Row: {
+          categoria: string | null
+          criado_em: string | null
+          criado_por: string | null
+          data: string
+          descricao: string
+          id: string
+          valor: number
+        }
+        Insert: {
+          categoria?: string | null
+          criado_em?: string | null
+          criado_por?: string | null
+          data: string
+          descricao: string
+          id?: string
+          valor: number
+        }
+        Update: {
+          categoria?: string | null
+          criado_em?: string | null
+          criado_por?: string | null
+          data?: string
+          descricao?: string
+          id?: string
+          valor?: number
+        }
+        Relationships: []
+      }
+      manutencoes: {
+        Row: {
+          cliente_id: string | null
+          criado_em: string | null
+          criado_por: string | null
+          data: string
+          descricao: string | null
+          id: string
+          tipo: string
+          valor: number
+        }
+        Insert: {
+          cliente_id?: string | null
+          criado_em?: string | null
+          criado_por?: string | null
+          data: string
+          descricao?: string | null
+          id?: string
+          tipo: string
+          valor: number
+        }
+        Update: {
+          cliente_id?: string | null
+          criado_em?: string | null
+          criado_por?: string | null
+          data?: string
+          descricao?: string | null
+          id?: string
+          tipo?: string
+          valor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "manutencoes_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          criado_em: string | null
+          id: string
+          nome: string
+        }
+        Insert: {
+          criado_em?: string | null
+          id: string
+          nome: string
+        }
+        Update: {
+          criado_em?: string | null
+          id?: string
+          nome?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      relatorio_financeiro: {
+        Args: { usuario_id: string }
+        Returns: {
+          despesas: number
+          lucro: number
+          mes: string
+          receitas: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
